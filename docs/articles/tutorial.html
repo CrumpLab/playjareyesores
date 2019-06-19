@@ -91,8 +91,8 @@
 <h2 class="hasAnchor">
 <a href="#two-academic-papers" class="anchor"></a>Two academic papers</h2>
 <p>I’m reviewing a paper right now. It’s very similar to another paper I’ve read by the same author. Whole chunks are copied from one previous paper to another. I can’t be bothered to “manually” figure out which parts are the same. It would be nice to have some R functions for this.</p>
-<div id="htmlwidget-f25a9f66e36519a58a5c" style="width:400px;height:150px;" class="nomnoml html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f25a9f66e36519a58a5c">{"x":{"code":"\n  #fill: #FEFEFF\n  #lineWidth: 1\n  #zoom: 4\n  #direction: right\n   [paper 1 | get into R] -> [clean]\n[paper 2 | get into R] -> [clean]\n[clean | keep parts you want] -> [compare]\n[compare | lots of methods to try] -> [Report | Stuff you want to learn]","svg":false},"evals":[],"jsHooks":[]}</script><p>Ok, did some googling and tried out a bunch things. I found some great packages that already exist, so am going to play around with them a bit. These packages include <code>textreuse</code>, and <code>tabulizer</code> (which unfortunately depends on Java, but allows for importing pdfs with 2 columns, useful for scientific papers).</p>
+<div id="htmlwidget-1cb462b8684f176ddc79" style="width:400px;height:150px;" class="nomnoml html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1cb462b8684f176ddc79">{"x":{"code":"\n  #fill: #FEFEFF\n  #lineWidth: 1\n  #zoom: 4\n  #direction: right\n   [paper 1 | get into R] -> [clean]\n[paper 2 | get into R] -> [clean]\n[clean | keep parts you want] -> [compare]\n[compare | lots of methods to try] -> [Report | Stuff you want to learn]","svg":false},"evals":[],"jsHooks":[]}</script><p>Ok, did some googling and tried out a bunch things. I found some great packages that already exist, so am going to play around with them a bit. These packages include <code>textreuse</code>, and <code>tabulizer</code> (which unfortunately depends on Java, but allows for importing pdfs with 2 columns, useful for scientific papers).</p>
 </div>
 <div id="import-and-cleaning-functions" class="section level2">
 <h2 class="hasAnchor">
@@ -146,6 +146,50 @@
 <span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; [1] 0.07081316</span></span>
 <span id="cb6-9"><a href="#cb6-9"></a><span class="kw"><a href="../reference/ngram_proportion_same.html">ngram_proportion_same</a></span>(p1,p2,<span class="dv">5</span>)</span>
 <span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt; [1] 0.05574508</span></span></code></pre></div>
+<p>By default, the overlapping ngrams are not returned, but they can be using <code>show="ngrams"</code>. Note, that I’ve done some further cleaning the texts, this was necessary after I added another feature to <code>show="ngrams"</code>, see next section. In general, it’s not clear to me how “clean” the text needs to be, and I’ll try to get back to this and figure it out.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>p1 &lt;-<span class="st"> </span>qdapRegex<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/qdapRegex/topics/rm_non_ascii">rm_non_ascii</a></span>(p1) <span class="op">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="st">  </span>tm<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/tm/topics/removeNumbers">removeNumbers</a></span>() <span class="op">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="st">  </span>qdapRegex<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/qdapRegex/topics/rm_non_words">rm_non_words</a></span>()</span>
+<span id="cb7-4"><a href="#cb7-4"></a>p2 &lt;-<span class="st"> </span>qdapRegex<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/qdapRegex/topics/rm_non_ascii">rm_non_ascii</a></span>(p2) <span class="op">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="st">  </span>tm<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/tm/topics/removeNumbers">removeNumbers</a></span>() <span class="op">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="st">  </span>qdapRegex<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/qdapRegex/topics/rm_non_words">rm_non_words</a></span>()</span>
+<span id="cb7-7"><a href="#cb7-7"></a>out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ngram_proportion_same.html">ngram_proportion_same</a></span>(p1,p2,<span class="dv">10</span>,<span class="dt">show=</span><span class="st">"ngrams"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8"></a>out<span class="op">$</span>the_grams[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>] <span class="co"># show first 10 ngrams</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt;  [1] "a century of research on the stroop effect an integrative"                 </span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt;  [2] "a circle in diameter or a square in width that"                            </span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt;  [3] "a first language had normal color vision and had normal"                   </span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt;  [4] "a fixation cross displayed in white against a black background"            </span></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt;  [5] "a microphone and a voice activated relay timed the response"               </span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt;  [6] "a mixed design anova with experiment location vs shape as"                 </span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="co">#&gt;  [7] "a parallel distributed processing model of the stroop effect psychological"</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="co">#&gt;  [8] "a significant main effect of congruency f mse p responses"                 </span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="co">#&gt;  [9] "a simple priming procedure involving the presentation of a color"          </span></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="co">#&gt; [10] "a solution to the effect of sample size on outlier"</span></span></code></pre></div>
+<p>These two papers were on the same topic, and had many of the same references, which account for much of the overlap.</p>
+</div>
+<div id="reporting" class="section level2">
+<h2 class="hasAnchor">
+<a href="#reporting" class="anchor"></a>Reporting</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>t1 &lt;-<span class="st"> "here is some text. I'd like to write about a few things. Then I'm going to compare what I wrote here with what I'm going to write in a little bit. After that, I'm going to make a function to look at the documents side by side, and bold the ngrams that are the same between the texts."</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>t2 &lt;-<span class="st">"And some more text for you. This time I'm not as certain what I'm going to say, but I'm going to compare what I write here with what I wrote before. I'll do that in a little. The purpose is to get some text that I can use to make a report that lines up the documents, showing which ngrams were the same."</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a>out &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ngram_proportion_same.html">ngram_proportion_same</a></span>(t1,t2,<span class="dv">3</span>,<span class="dt">show=</span><span class="st">"ngrams"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5"></a></span>
+<span id="cb8-6"><a href="#cb8-6"></a>out<span class="op">$</span>a_print</span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; [1] "here is some text. i'd like to write about a few things. then I'M GOING TO COMPARE WHAT I wrote HERE WITH WHAT I'M GOING TO write in a little bit. after that, I'M GOING TO make a function to look at the documents side by side, and bold the ngrams that are the same between the texts."</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a></span>
+<span id="cb8-9"><a href="#cb8-9"></a>out<span class="op">$</span>b_print</span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; [1] "and some more text for you. this time i'm not as certain what I'M GOING TO say, but I'M GOING TO COMPARE WHAT I write HERE WITH WHAT i wrote before. i'll do that in a little. the purpose is to get some text that i can use TO MAKE A report that lines up the documents, showing which ngrams were the same."</span></span></code></pre></div>
+<div class="row">
+<div class="col-md-6">
+<h2 id="a">A</h2>
+<p>[1] “here is some text. i’d like to write about a few things. then I’M GOING TO COMPARE WHAT I wrote HERE WITH WHAT I’M GOING TO write in a little bit. after that, I’M GOING TO make a function to look at the documents side by side, and bold the ngrams that are the same between the texts.”</p>
+</div>
+<div class="col-md-6">
+<h2 id="b">B</h2>
+<p>[1] “and some more text for you. this time i’m not as certain what I’M GOING TO say, but I’M GOING TO COMPARE WHAT I write HERE WITH WHAT i wrote before. i’ll do that in a little. the purpose is to get some text that i can use TO MAKE A report that lines up the documents, showing which ngrams were the same.”</p>
+</div>
+</div>
 </div>
   </div>
 
@@ -159,6 +203,7 @@
       <li><a href="#compare-documents-using-textreuse">Compare documents using textreuse</a></li>
       <li><a href="#estimating-number-of-same-words">Estimating number of same words</a></li>
       <li><a href="#n-gram-methods">N gram methods</a></li>
+      <li><a href="#reporting">Reporting</a></li>
       </ul>
 </div>
       </div>

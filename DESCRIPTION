@@ -20,7 +20,8 @@ Imports:
     pdftools,
     tabulizer,
     dplyr,
-    NLP
+    NLP,
+    stringr
 Suggests: 
     knitr,
     rmarkdown

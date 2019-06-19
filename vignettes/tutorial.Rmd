@@ -105,9 +105,56 @@ ngram_proportion_same(p1,p2,2)
 ngram_proportion_same(p1,p2,3)
 ngram_proportion_same(p1,p2,4)
 ngram_proportion_same(p1,p2,5)
+```
+
+By default, the overlapping ngrams are not returned, but they can be using `show="ngrams"`. Note, that I've done some further cleaning the texts, this was necessary after I added another feature to `show="ngrams"`, see next section. In general, it's not clear to me how "clean" the text needs to be, and I'll try to get back to this and figure it out.
+
+```{r}
+p1 <- qdapRegex::rm_non_ascii(p1) %>%
+  tm::removeNumbers() %>%
+  qdapRegex::rm_non_words()
+p2 <- qdapRegex::rm_non_ascii(p2) %>%
+  tm::removeNumbers() %>%
+  qdapRegex::rm_non_words()
+out <- ngram_proportion_same(p1,p2,10,show="ngrams")
+out$the_grams[1:10] # show first 10 ngrams
+```
+
+These two papers were on the same topic, and had many of the same references, which account for much of the overlap.
+
+## Reporting
+
+```{r}
+t1 <- "here is some text. I'd like to write about a few things. Then I'm going to compare what I wrote here with what I'm going to write in a little bit. After that, I'm going to make a function to look at the documents side by side, and bold the ngrams that are the same between the texts."
+t2 <-"And some more text for you. This time I'm not as certain what I'm going to say, but I'm going to compare what I write here with what I wrote before. I'll do that in a little. The purpose is to get some text that I can use to make a report that lines up the documents, showing which ngrams were the same."
+
+out <- ngram_proportion_same(t1,t2,3,show="ngrams")
+
+out$a_print
+
+out$b_print
 
 ```
 
+
+<div class = "row">
+<div class = "col-md-6">
+
+## A
+
+```{r, results="asis", echo=FALSE}
+out$a_print
+```
+</div>
+<div class = "col-md-6">
+
+## B
+
+```{r, results="asis", echo=FALSE}
+out$b_print
+```
+</div>
+</div>
 
 
 

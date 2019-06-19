@@ -19,7 +19,7 @@ use_r("ngram_proportion_same")
 use_rcpp(name = "rowSumsSq")
 
 use_package("qdapRegex", "Suggests")
-usethis::use_package("NLP")
+usethis::use_package("stringr")
 
 usethis::use_pipe()
 
