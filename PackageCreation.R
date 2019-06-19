@@ -14,19 +14,19 @@ pkgdown::build_news()
 use_news_md()
 
 #function creation
-use_r("sl_semantic_space")
+use_r("ngram_proportion_same")
 
 use_rcpp(name = "rowSumsSq")
 
-use_package("lsa", "Suggests")
-usethis::use_package("tidyr")
+use_package("qdapRegex", "Suggests")
+usethis::use_package("NLP")
 
 usethis::use_pipe()
 
 use_package_doc()
 use_namespace()
 
-use_vignette("Semantic_Librarian_Tutorial")
+use_vignette("Using_playjaReyesir")
 
 
 

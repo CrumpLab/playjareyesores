@@ -1,24 +1,18 @@
-# playjaReyesir
+# playjareyesores
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of playjaReyesir is to ...
+**Very much still in development, mainly for fun right now**
+
+The goal of playjareyesores is to provide some useful functions for detecting textual overlap between documents.
 
 ## Installation
 
-You can install the released version of playjaReyesir from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of playjareyesores from.
 
 ``` r
-install.packages("playjaReyesir")
+devtools::install_github("CrumpLab/playjareyesores")
 ```
 
-## Example
-
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-library(playjaReyesir)
-## basic example code
-```
 

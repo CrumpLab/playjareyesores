@@ -1,0 +1,115 @@
+---
+title: "Play jar eye sores"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using playjareyesores}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(playjareyesores)
+library(nomnoml)
+```
+
+Some brief background. Occassionally, I have students cheat on their essays or long-answer questions, typically by copying their answers from somewhere. My university provides access to plagiarism detection services like turnitin and safeassign, however these tools can be cumbersome to use. I have also sometimes resorted to using R for plagiarism detection. I am writing this package to collect my code for this purpose and put it one place.
+
+Also, I am using this vignette as a pseudo blog to work out which kinds of functions to focus on building. So, this is a tutorial for myself.
+
+## Two academic papers
+
+I'm reviewing a paper right now. It's very similar to another paper I've read by the same author. Whole chunks are copied from one previous paper to another. I can't be bothered to "manually" figure out which parts are the same. It would be nice to have some R functions for this.
+
+```{r, echo= FALSE}
+#direction: right
+nomnoml::nomnoml(
+"[paper 1 | get into R] -> [clean]
+[paper 2 | get into R] -> [clean]
+[clean | keep parts you want] -> [compare]
+[compare | lots of methods to try] -> [Report | Stuff you want to learn]",
+height = 150, width=400)
+```
+
+Ok, did some googling and tried out a bunch things. I found some great packages that already exist, so am going to play around with them a bit. These packages include `textreuse`, and `tabulizer` (which unfortunately depends on Java, but allows for importing pdfs with 2 columns, useful for scientific papers).
+
+## Import and cleaning functions
+
+Here are some wrapper functions for importing pdfs or plain text, and doing some basic cleaning, involving, deleting new lines, deleting "- " which happens when lines run over in a .pdf, and converting everything to lowercase.
+
+```{r}
+p1 <- clean_1_col_pdf(file="data/test1col.pdf")
+p2 <- clean_2_col_pdf(file="data/CGM2006.pdf")
+p3 <- clean_plain_txt(file="data/sometext.txt")
+```
+
+## Compare documents using textreuse
+
+The `textreuse` package can do some heavy lifting in terms of comparing documents for overlap. Below I use the `align_local` function to compare two of my papers. Looks like my self-plagiarism is limited to one of the methods sections, which makes sense because these two papers would have used the same methods.
+
+```{r}
+library(textreuse)
+p1 <- clean_2_col_pdf(file="data/CGM2006.pdf")
+p2 <- clean_2_col_pdf(file="data/Crump et al. - 2008.pdf")
+test <- align_local(p1,p2)
+```
+
+<div class = "row">
+<div class = "col-md-6">
+
+## Crump et al. 2006
+
+```{r, results="asis", echo=FALSE}
+test$a_edits
+```
+</div>
+<div class = "col-md-6">
+
+## Crump et al. 2008
+
+```{r, results="asis", echo=FALSE}
+test$b_edits
+```
+</div>
+</div>
+
+## Estimating number of same words
+
+The `align_local` function is interesting, it produces to strings, one for each document, that are lined up as well as possible, and identical in length. When words don't line up, there is a fudge factor, and missing, deleted or different words are replaced with a hashtag. Here's a quick and dirty way to figure out how many of the words exactly line up.
+
+```{r}
+al_summary <- align_local_sum(test)
+al_summary$sum
+
+```
+
+```{r, results="asis"}
+al_summary$sentence
+```
+
+This seems useful to me. The sentence that you are looking at didn't necessarilly appear as consecutive words, however it gives a reasonable bird's eye view of the overlap between two documents. If there are a big chunks here, one document was copied from another.
+
+## N gram methods
+
+Another useful way to detect overlap is to use n-gram methods. Here, I use the `tm` package to create a document term matrix for two texts. The function allows you to set the number of n-grams. All unique n-grams between the texts are computed and counted for each text. Then I fid the proportion of common n-grams between the two texts. In general, if texts use the same words, they will have some overlap, but as the number of n-grams grows, texts that are not the same will have vanishingly small overlap.
+
+```{r}
+ngram_proportion_same(p1,p2,1)
+ngram_proportion_same(p1,p2,2)
+ngram_proportion_same(p1,p2,3)
+ngram_proportion_same(p1,p2,4)
+ngram_proportion_same(p1,p2,5)
+
+```
+
+
+
+
+
+

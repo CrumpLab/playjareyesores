@@ -1,5 +1,5 @@
-Package: playjaReyesir
-Title: Functions for detecting play jar eye sirs
+Package: playjareyesores
+Title: Functions for detecting play jar eye sores
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Matt",
@@ -13,3 +13,15 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
+Imports: 
+    magrittr,
+    tm,
+    qdapRegex,
+    pdftools,
+    tabulizer,
+    dplyr,
+    NLP
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
