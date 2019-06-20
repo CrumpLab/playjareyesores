@@ -10,7 +10,9 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  message = FALSE,
+  warning = FALSE
 )
 ```
 
@@ -26,7 +28,7 @@ The main article shows how to compare two documents and get a report showing ove
 
 I don't have a function for batch reading in a bunch of pdfs just yet. Reading in text from pdfs can be tricky business. Might be better to to write your own code for this so you can flag .pdfs that are behaving badly. 
 
-In any case, what we have here are a bunch of my papers, and two from sternberg. The first step is to read the papers in. Hopefully I don't self-plagiarize very much, and Sternberg's texts will pop out as having lots of overlap.
+In any case, what we have here are a bunch of my papers, and two from Sternberg. The first step is to read the papers in. Hopefully I don't self-plagiarize very much, and Sternberg's texts will pop out as having lots of overlap.
 
 ```{r}
 file_paths <- list.files("pdfs/")
@@ -66,7 +68,7 @@ knitr::kable(round(out$similarities, digits=2))
 
 ## check these
 
-Well, are their any pairs we should check more closely? Yup, the sternberg papers.
+Well, are there any pairs we should check more closely? Yup, the Sternberg papers.
 
 ```{r}
 knitr::kable(out$check_these)

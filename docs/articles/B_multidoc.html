@@ -96,21 +96,13 @@
     
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(playjareyesores)</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(magrittr)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="co">#&gt; </span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="co">#&gt; </span></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="co">#&gt;     filter, lag</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="co">#&gt; </span></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span></code></pre></div>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</span></code></pre></div>
 <p>The main article shows how to compare two documents and get a report showing overlap between the text at a given ngram level. You might have several documents that you want to compare. This tutorial develops methods for multiple-document comparision.</p>
 <div id="read-in-some-pdfs" class="section level2">
 <h2 class="hasAnchor">
 <a href="#read-in-some-pdfs" class="anchor"></a>Read in some pdfs</h2>
 <p>I don’t have a function for batch reading in a bunch of pdfs just yet. Reading in text from pdfs can be tricky business. Might be better to to write your own code for this so you can flag .pdfs that are behaving badly.</p>
-<p>In any case, what we have here are a bunch of my papers, and two from sternberg. The first step is to read the papers in. Hopefully I don’t self-plagiarize very much, and Sternberg’s texts will pop out as having lots of overlap.</p>
+<p>In any case, what we have here are a bunch of my papers, and two from Sternberg. The first step is to read the papers in. Hopefully I don’t self-plagiarize very much, and Sternberg’s texts will pop out as having lots of overlap.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>file_paths &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list.files">list.files</a></span>(<span class="st">"pdfs/"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2"></a></span>
 <span id="cb2-3"><a href="#cb2-3"></a>pdf_txts &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>()</span>
@@ -453,7 +445,7 @@
 <div id="check-these" class="section level2">
 <h2 class="hasAnchor">
 <a href="#check-these" class="anchor"></a>check these</h2>
-<p>Well, are their any pairs we should check more closely? Yup, the sternberg papers.</p>
+<p>Well, are there any pairs we should check more closely? Yup, the Sternberg papers.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>knitr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>(out<span class="op">$</span>check_these)</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
