@@ -13,7 +13,7 @@ clean_2_col_pdf(file)
 character string of cleaned text
 }
 \description{
-load and clean 2 column pdf
+Note this function requires the tabulizer package, which also requires a java installation. It is a useful function for reading in two-column pdfs often found in the scientific literature.
 }
 \examples{
 

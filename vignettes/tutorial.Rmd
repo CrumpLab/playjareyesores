@@ -128,12 +128,7 @@ These two papers were on the same topic, and had many of the same references, wh
 t1 <- "here is some text. I'd like to write about a few things. Then I'm going to compare what I wrote here with what I'm going to write in a little bit. After that, I'm going to make a function to look at the documents side by side, and bold the ngrams that are the same between the texts."
 t2 <-"And some more text for you. This time I'm not as certain what I'm going to say, but I'm going to compare what I write here with what I wrote before. I'll do that in a little. The purpose is to get some text that I can use to make a report that lines up the documents, showing which ngrams were the same."
 
-out <- ngram_proportion_same(t1,t2,3,show="ngrams")
-
-out$a_print
-
-out$b_print
-
+out <- ngram_proportion_same(t1,t2,3,show="ngrams", meta=c("A title","B title"))
 ```
 
 
@@ -155,6 +150,44 @@ out$b_print
 ```
 </div>
 </div>
+
+
+### Range of n grams
+
+```{r}
+out <- ngrams_analysis(t1,t2,range = 2:5)
+attributes(out)
+attributes(out$ngram2)
+```
+
+## Full report using ngrams_report
+
+The `ngrams_report` function takes the output from the `ngrams_analysis` function and returns a print object for use in an .RMD document that prints to HTML. The print out is a summary of the analysis.
+
+Here is an example using two papers published by Robert Sternberg, who has been identified as self-plagiarizing in some of his work ([for example see](http://steamtraen.blogspot.com/2018/04/some-instances-of-apparent-duplicate.html)). I thought this would be a good test case. I obtained that Sternberg published in 2010, where there was supposed overlap between the texts. Let's use the ngrams_report function to find out. Remember, to set the knitr chunk option to `results ="asis"`
+
+```{r, results="asis"}
+# load in papers
+p1 <- clean_1_col_pdf("data/Sternberg2010.pdf")
+p2 <- clean_1_col_pdf("data/Sternberg2010b.pdf")
+
+# clean them up a a  bit more
+p1 <- LSAfun::breakdown(p1) %>%
+  qdapRegex::rm_white()
+p2 <- LSAfun::breakdown(p2) %>%
+  qdapRegex::rm_white()
+
+# run the ngram analysis
+meta_titles <- c("Sternberg 2010A, School Psychology International",
+                 "Sternberg 2010B, Journal of Cognitive Education and Psychology")
+out <- ngrams_analysis(p1,p2,3:8, meta = meta_titles)
+
+# print out results below
+ngrams_report(out, print_n = 5, highlight_n = "ngram5")
+
+```
+
+
 
 
 

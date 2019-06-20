@@ -11,7 +11,7 @@
 #' p1 <- "hello my name is someone someone"
 #' p2 <- "my name is someone else"
 #' ngram_proportion_same(p1,p2,2)
-ngram_proportion_same<- function(a,b,n_grams,show="none"){
+ngram_proportion_same<- function(a,b,n_grams,show="none",meta="none"){
   docs <- c(a,b)
   vc <- tm::VCorpus(tm::VectorSource(docs))
 
@@ -41,9 +41,19 @@ ngram_proportion_same<- function(a,b,n_grams,show="none"){
                                          toupper(the_grams[i]))
     }
 
-    return(list(sum = sum(sum_up)/length(sum_up),
-                the_grams = the_grams,
-                a_print = temp_a,
-                b_print = temp_b))
+    if(length(meta) == 2){
+      a_title <- meta[1]
+      b_title <- meta[2]
+    } else {
+      a_title <- "A"
+      b_title <- "B"
+    }
+
+    return( list(proportion = sum(sum_up)/length(sum_up),
+                      the_grams = the_grams,
+                      a_title = a_title,
+                      b_title = b_title,
+                      a_print = temp_a,
+                      b_print = temp_b) )
   }
 }

@@ -4,7 +4,7 @@
 \alias{ngram_proportion_same}
 \title{Proportion n gram overlap}
 \usage{
-ngram_proportion_same(a, b, n_grams, show = "none")
+ngram_proportion_same(a, b, n_grams, show = "none", meta = "none")
 }
 \arguments{
 \item{a}{character string of text}

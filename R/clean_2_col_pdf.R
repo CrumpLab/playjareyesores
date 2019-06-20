@@ -3,6 +3,7 @@
 #' @param file a file path
 #'
 #' @return character string of cleaned text
+#' @description Note this function requires the tabulizer package, which also requires a java installation. It is a useful function for reading in two-column pdfs often found in the scientific literature.
 #' @export
 #'
 #' @examples

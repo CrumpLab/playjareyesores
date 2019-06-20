@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>summarize align local output — align_local_sum • playjareyesores</title>
+<title>Proportion ngram overlap for a range of ngrams — ngrams_analysis • playjareyesores</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="summarize align local output — align_local_sum" />
+<meta property="og:title" content="Proportion ngram overlap for a range of ngrams — ngrams_analysis" />
 
-<meta property="og:description" content="summarize align local output" />
+<meta property="og:description" content="Proportion ngram overlap for a range of ngrams" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -115,34 +115,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>summarize align local output</h1>
+    <h1>Proportion ngram overlap for a range of ngrams</h1>
     
-    <div class="hidden name"><code>align_local_sum.Rd</code></div>
+    <div class="hidden name"><code>ngrams_analysis.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>summarize align local output</p>
+    <p>Proportion ngram overlap for a range of ngrams</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>align_local_sum</span>(<span class='no'>al_var</span>)</pre>
+    <pre class="usage"><span class='fu'>ngrams_analysis</span>(<span class='no'>a</span>, <span class='no'>b</span>, <span class='no'>range</span>, <span class='kw'>meta</span> <span class='kw'>=</span> <span class='st'>"none"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>al_var</th>
-      <td><p>list produced by align local</p></td>
+      <th>a</th>
+      <td><p>string of text</p></td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td><p>string of text</p></td>
+    </tr>
+    <tr>
+      <th>range</th>
+      <td><p>integer vector for ngram range (e.g., 3:5)</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>list</p><ul>
-<li><p>df dataframe of words in a an d</p></li>
-<li><p>sum integer number of words the same</p></li>
-<li><p>sentence string the sentence</p></li>
+    <p>list of lists, each list contains:</p><ul>
+<li><p>proportion numeric of overlapping ngrams</p></li>
+<li><p>the_grams character vector of ngrams that overlap</p></li>
+<li><p>a_print string the first document, with</p></li>
 </ul>
 
     
