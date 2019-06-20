@@ -1,0 +1,79 @@
+---
+title: "Play jar eye sores: Multiple document comparison"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using playjareyesores}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(playjareyesores)
+library(magrittr)
+library(dplyr)
+```
+
+The main article shows how to compare two documents and get a report showing overlap between the text at a given ngram level. You might have several documents that you want to compare. This tutorial develops methods for multiple-document comparision.
+
+## Read in some pdfs
+
+I don't have a function for batch reading in a bunch of pdfs just yet. Reading in text from pdfs can be tricky business. Might be better to to write your own code for this so you can flag .pdfs that are behaving badly. 
+
+In any case, what we have here are a bunch of my papers, and two from sternberg. The first step is to read the papers in. Hopefully I don't self-plagiarize very much, and Sternberg's texts will pop out as having lots of overlap.
+
+```{r}
+file_paths <- list.files("pdfs/")
+
+pdf_txts <- list()
+for(i in 1:length(file_paths)){
+  paper <- clean_2_col_pdf(paste0("pdfs/",file_paths[i]))
+  pdf_txts[i] <- qdapRegex::rm_non_ascii(paper) %>%
+    LSAfun::breakdown()
+}
+
+```
+
+## Compare the documents
+
+```{r}
+the_texts <- unlist(pdf_txts)
+out <- multi_doc_compare(text=the_texts,
+                         n_grams = 3,
+                         sd_criterion = 3)
+```
+
+The function returns several things:
+
+  - $dtm is the document term matrix, containing the n-gram frequency counts for each document
+  - $histogram is a histogram of the similarity values, good to check for outliers with high similarity
+  - $similarities is a cosine similarity matrix with the similarities between each document and every other document
+  - $mean_similarity is the average similarity in the set
+  - $sd_similarity is the standard deviation of the similarities. The sd_criterion uses the mean plus a multiplier of the sd_similarity
+  - $check_these is a dataframe with pairs of documents that had a similarity score higher than the sd_criterion, these ones contain higher textual overlap than the rest of the set, and might be checked further.
+  
+Let's look at the similarities between the articles, not particularly compelling as you will see:
+
+```{r}
+knitr::kable(round(out$similarities, digits=2))
+```
+
+## check these
+
+Well, are their any pairs we should check more closely? Yup, the sternberg papers.
+
+```{r}
+knitr::kable(out$check_these)
+```
+
+
+
+
+
+

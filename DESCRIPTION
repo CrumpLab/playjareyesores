@@ -21,7 +21,8 @@ Imports:
     tabulizer,
     dplyr,
     NLP,
-    stringr
+    stringr,
+    lsa
 Suggests: 
     knitr,
     rmarkdown

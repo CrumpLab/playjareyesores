@@ -14,12 +14,12 @@ pkgdown::build_news()
 use_news_md()
 
 #function creation
-use_r("ngrams_report")
+use_r("multi_doc_compare")
 
 use_rcpp(name = "rowSumsSq")
 
 use_package("qdapRegex", "Suggests")
-usethis::use_package("stringr")
+usethis::use_package("lsa")
 
 usethis::use_pipe()
 

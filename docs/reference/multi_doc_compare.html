@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>clean load 1 column pdf — clean_1_col_pdf • playjareyesores</title>
+<title>Multiple document comparison for textual overlap — multi_doc_compare • playjareyesores</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="clean load 1 column pdf — clean_1_col_pdf" />
+<meta property="og:title" content="Multiple document comparison for textual overlap — multi_doc_compare" />
 
-<meta property="og:description" content="clean load 1 column pdf" />
+<meta property="og:description" content="Multiple document comparison for textual overlap" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -118,31 +118,47 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>clean load 1 column pdf</h1>
+    <h1>Multiple document comparison for textual overlap</h1>
     
-    <div class="hidden name"><code>clean_1_col_pdf.Rd</code></div>
+    <div class="hidden name"><code>multi_doc_compare.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>clean load 1 column pdf</p>
+    <p>Multiple document comparison for textual overlap</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>clean_1_col_pdf</span>(<span class='no'>file</span>)</pre>
+    <pre class="usage"><span class='fu'>multi_doc_compare</span>(<span class='no'>texts</span>, <span class='no'>n_grams</span>, <span class='no'>sd_criterion</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>file</th>
-      <td><p>a file path</p></td>
+      <th>texts</th>
+      <td><p>character vector of texts, each text is a string in the vector</p></td>
+    </tr>
+    <tr>
+      <th>n_grams</th>
+      <td><p>integer to specify ngram units</p></td>
+    </tr>
+    <tr>
+      <th>sd_criterion</th>
+      <td><p>numeric set a standard deviation criterion for returning documents that are unsually similar, 2-3 is pretty good</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>character string of text</p>
+    <p>list</p><ul>
+<li><p>dtm matrix document term matrix for all texts</p></li>
+<li><p>histogram a histogram of the cosine similarity values between every text</p></li>
+<li><p>similarities matrix cosine similarities between every text</p></li>
+<li><p>mean_similarity numeric the mean similarity between all texts</p></li>
+<li><p>sd_similarity numeric the standard deviation of the similarities</p></li>
+<li><p>check_these dataframe document pairs that were above the criterion, might want to check these ones))</p></li>
+</ul>
+
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

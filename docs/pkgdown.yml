@@ -2,5 +2,6 @@ pandoc: 2.7.3
 pkgdown: 1.3.0
 pkgdown_sha: ~
 articles:
-  tutorial: tutorial.html
+  A_tutorial: A_tutorial.html
+  B_multidoc: B_multidoc.html
 
