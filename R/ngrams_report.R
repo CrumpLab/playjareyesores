@@ -9,7 +9,7 @@
 #'
 #' @examples
 #'
-ngrams_report <-  function(out,print_n,highlight_n){
+ngrams_report <-  function(out,print_n,highlight_n,color="red"){
 
   proportion_df <- data.frame()
   for(i in 1:length(out)){
@@ -39,11 +39,11 @@ ngrams_report <-  function(out,print_n,highlight_n){
     cat("<div class = 'row'>",
         "<div class = 'col-md-6'>", sep="\n")
     cat("## ",out[[highlight_n]]$a_title,"\n")
-    cat(colorize_uppercase(out[[highlight_n]]$a_print),"\n")
+    cat(colorize_uppercase(out[[highlight_n]]$a_print,color),"\n")
     cat("</div>","\n")
     cat("<div class = 'col-md-6'>","\n")
     cat("## ",out[[highlight_n]]$b_title,"\n")
-    cat(colorize_uppercase(out[[highlight_n]]$b_print),"\n")
+    cat(colorize_uppercase(out[[highlight_n]]$b_print,color),"\n")
     cat("</div>","\n")
     cat("</div>")
   }

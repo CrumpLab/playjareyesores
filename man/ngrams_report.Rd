@@ -4,7 +4,7 @@
 \alias{ngrams_report}
 \title{Produce ngram report in rmd for html}
 \usage{
-ngrams_report(out, print_n, highlight_n)
+ngrams_report(out, print_n, highlight_n, color = "red")
 }
 \arguments{
 \item{out}{list from ngrams_analysis}

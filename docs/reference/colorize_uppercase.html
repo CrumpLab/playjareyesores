@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Turn uppercase words red — colorize_uppercase • playjareyesores</title>
+<title>highlight uppercase words — colorize_uppercase • playjareyesores</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Turn uppercase words red — colorize_uppercase" />
+<meta property="og:title" content="highlight uppercase words — colorize_uppercase" />
 
-<meta property="og:description" content="Turn uppercase words red" />
+<meta property="og:description" content="This function detects uppercase words, then wraps them with an HTML span. These spans are given the id = ngram, and a color specified by color. The ngram id could be used in css to further customize the style of the highlighted text." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -118,18 +118,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Turn uppercase words red</h1>
+    <h1>highlight uppercase words</h1>
     
     <div class="hidden name"><code>colorize_uppercase.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Turn uppercase words red</p>
+    <p>This function detects uppercase words, then wraps them with an HTML span. These spans are given the id = ngram, and a color specified by color. The ngram id could be used in css to further customize the style of the highlighted text.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>colorize_uppercase</span>(<span class='no'>text</span>)</pre>
+    <pre class="usage"><span class='fu'>colorize_uppercase</span>(<span class='no'>text</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"red"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -137,6 +137,10 @@
     <tr>
       <th>text</th>
       <td><p>string of text</p></td>
+    </tr>
+    <tr>
+      <th>color</th>
+      <td><p>a color code for html css</p></td>
     </tr>
     </table>
     

@@ -2,18 +2,20 @@
 % Please edit documentation in R/colorize_uppercase.R
 \name{colorize_uppercase}
 \alias{colorize_uppercase}
-\title{Turn uppercase words red}
+\title{highlight uppercase words}
 \usage{
-colorize_uppercase(text)
+colorize_uppercase(text, color = "red")
 }
 \arguments{
 \item{text}{string of text}
+
+\item{color}{a color code for html css}
 }
 \value{
 text string of text with css span color set to red for uppercase words
 }
 \description{
-Turn uppercase words red
+This function detects uppercase words, then wraps them with an HTML span. These spans are given the id = ngram, and a color specified by color. The ngram id could be used in css to further customize the style of the highlighted text.
 }
 \examples{
 
