@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "mcrump@brooklyn.cuny.edu",
            comment = c(ORCID = "0000-0002-5612-0090"))
-Description: What the package does (one paragraph).
+Description: Functions for detecting textual overlap (possible plagiarism) between documents.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
