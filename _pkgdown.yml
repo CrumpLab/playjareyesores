@@ -1,10 +1,16 @@
 destination: docs
+url: https://crumplab.github.io/playjareyesores
 
 template:
-  params:
-    bootswatch: yeti
   opengraph:
     img: logo.png
+  params:
+    bootswatch: yeti
+
+authors:
+  Matt Crump:
+    href: https://crumplab.github.io
+
 
 navbar:
   structure:

@@ -4,4 +4,7 @@ pkgdown_sha: ~
 articles:
   A_tutorial: A_tutorial.html
   B_multidoc: B_multidoc.html
+urls:
+  reference: https://crumplab.github.io/playjareyesores/reference
+  article: https://crumplab.github.io/playjareyesores/articles
 
