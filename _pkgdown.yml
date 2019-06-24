@@ -3,6 +3,8 @@ destination: docs
 template:
   params:
     bootswatch: yeti
+  opengraph:
+    img: logo.png
 
 navbar:
   structure:
